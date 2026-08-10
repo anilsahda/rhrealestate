@@ -1,13 +1,38 @@
 import { Play, Clock, Share2 } from 'lucide-react'
+import React from 'react'
 import pandaRoomImg from '../../assets/images/virtualTour/panda-room.png'
 import bhuviLogo from '../../assets/images/logo/bhuvi-logo.webp'
 
-const VirtualTour = () => {
+const VirtualTour = ({ projectData }) => {
+  const getEmbedUrl = (url) => {
+    if (!url) return null;
+    const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+    const match = url.match(regExp);
+    if (match && match[2].length === 11) {
+      return `https://www.youtube.com/embed/${match[2]}?autoplay=1`;
+    }
+    return url;
+  };
+
+  const embedUrl = projectData?.youtube ? getEmbedUrl(projectData.youtube) : null;
+  const [showVideo, setShowVideo] = React.useState(false);
+
   return (
     <section className="bg-white w-full">
-      <div className="relative w-full aspect-video md:aspect-[21/9] lg:aspect-[2.4/1] overflow-hidden cursor-pointer group">
+      <div className="relative w-full aspect-video md:aspect-[21/9] lg:aspect-[2.4/1] overflow-hidden group">
         
-        {/* Background Cover Image */}
+        {showVideo && embedUrl ? (
+          <iframe 
+            src={embedUrl} 
+            title="Virtual Tour"
+            className="absolute inset-0 w-full h-full"
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+          ></iframe>
+        ) : (
+          <div className="w-full h-full cursor-pointer" onClick={() => embedUrl ? setShowVideo(true) : null}>
+            {/* Background Cover Image */}
         <img
           src={pandaRoomImg}
           alt="Panda Playroom Virtual Tour"
@@ -55,7 +80,9 @@ const VirtualTour = () => {
               <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
             </svg>
           </button>
-        </div>
+            </div>
+          </div>
+        )}
       </div>
     </section>
   )

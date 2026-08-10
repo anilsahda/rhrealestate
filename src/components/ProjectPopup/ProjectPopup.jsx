@@ -20,7 +20,11 @@ const ProjectPopup = ({ isOpen, onClose, projectData, onSave }) => {
     bannerImage: '',
     overviewImage: '',
     otherDetails: '',
-    appId: 'APP001'
+    appId: 'APP001',
+    specificationsTitle: '',
+    specificationsDescription: '',
+    locationHighlightsTitle: '',
+    locationHighlightsDescription: ''
   });
 
   const [imagePreviews, setImagePreviews] = useState({
@@ -73,7 +77,11 @@ const ProjectPopup = ({ isOpen, onClose, projectData, onSave }) => {
       bannerImage: data.bannerImage || '',
       overviewImage: data.overviewImage || '',
       otherDetails: data.otherDetails || '',
-      appId: data.appId || 'APP001'
+      appId: data.appId || 'APP001',
+      specificationsTitle: data.specificationsTitle || '',
+      specificationsDescription: data.specificationsDescription || '',
+      locationHighlightsTitle: data.locationHighlightsTitle || '',
+      locationHighlightsDescription: data.locationHighlightsDescription || ''
     });
     setImagePreviews({
       logo: data.logo || '',
@@ -86,7 +94,8 @@ const ProjectPopup = ({ isOpen, onClose, projectData, onSave }) => {
     setFormData({
       id: '', name: '', overviewTitle: '', description: '', youtube: '',
       masterTitle: '', masterDescription: '', amentiesTitle: '', amentiesDescription: '',
-      logo: '', bannerImage: '', overviewImage: '', otherDetails: '', appId: 'APP001'
+      logo: '', bannerImage: '', overviewImage: '', otherDetails: '', appId: 'APP001',
+      specificationsTitle: '', specificationsDescription: '', locationHighlightsTitle: '', locationHighlightsDescription: ''
     });
     setImagePreviews({ logo: '', bannerImage: '', overviewImage: '' });
   };
@@ -215,6 +224,19 @@ const ProjectPopup = ({ isOpen, onClose, projectData, onSave }) => {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <textarea name="masterDescription" value={formData.masterDescription} onChange={handleTextChange} placeholder='Master Description' className="w-full border rounded px-3 py-2 focus:ring-amber-400 focus:border-amber-400 outline-none h-[70px]" required></textarea>
                 <textarea name="amentiesDescription" value={formData.amentiesDescription} onChange={handleTextChange} placeholder='Amenities Description' className="w-full border rounded px-3 py-2 focus:ring-amber-400 focus:border-amber-400 outline-none h-[70px]" required></textarea>
+              </div>
+            </div>
+
+            {/* Specifications & Highlights Section */}
+            <div className="border-t border-gray-200 pt-3 mt-4">
+              <h3 className="font-bold text-[14px] mb-3 text-[#f59e0b]">Specifications & Highlights</h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-3">
+                <input type="text" name="specificationsTitle" value={formData.specificationsTitle} onChange={handleTextChange} placeholder='Specifications Title' className="w-full border rounded px-3 py-2 focus:ring-amber-400 focus:border-amber-400 outline-none" required />
+                <input type="text" name="locationHighlightsTitle" value={formData.locationHighlightsTitle} onChange={handleTextChange} placeholder='Location Highlights Title' className="w-full border rounded px-3 py-2 focus:ring-amber-400 focus:border-amber-400 outline-none" required />
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <textarea name="specificationsDescription" value={formData.specificationsDescription} onChange={handleTextChange} placeholder='Specifications Description' className="w-full border rounded px-3 py-2 focus:ring-amber-400 focus:border-amber-400 outline-none h-[70px]" required></textarea>
+                <textarea name="locationHighlightsDescription" value={formData.locationHighlightsDescription} onChange={handleTextChange} placeholder='Location Highlights Description' className="w-full border rounded px-3 py-2 focus:ring-amber-400 focus:border-amber-400 outline-none h-[70px]" required></textarea>
               </div>
             </div>
           </form>

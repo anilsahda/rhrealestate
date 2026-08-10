@@ -38,11 +38,11 @@ const Home = () => {
         <Banner projectData={projectData} />
         <LeadCaptureBar onBrochureClick={() => setBrochureOpen(true)} />
         <ProjectOverview projectData={projectData} />
-        <VirtualTour />
+        <VirtualTour projectData={projectData} />
         <FloorPlans onBrochureClick={() => setBrochureOpen(true)} projectData={projectData} />
         <Amenities projectData={projectData} />
-        <Specifications />
-        <LocationHighlights onBrochureClick={() => setBrochureOpen(true)} />
+        <Specifications projectData={projectData} />
+        <LocationHighlights onBrochureClick={() => setBrochureOpen(true)} projectData={projectData} />
         {/* <MapEmbed /> */}
       </main>
       <Footer />

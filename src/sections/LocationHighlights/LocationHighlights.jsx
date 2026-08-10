@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import LocationAccordion from './LocationAccordion'
 import api from '../../services/api'
 
-const LocationHighlights = ({ onBrochureClick }) => {
+const LocationHighlights = ({ onBrochureClick, projectData }) => {
   const [openIndex, setOpenIndex] = useState(null)
   const [locationData, setLocationData] = useState([])
   const [loading, setLoading] = useState(true)
@@ -54,17 +54,18 @@ const LocationHighlights = ({ onBrochureClick }) => {
           
           {/* ── Left Column: Accordions & Button ── */}
           <div className="flex flex-col h-full">
-            <div className="mb-8">
-              <h2 className="text-2xl md:text-[32px] font-bold text-[#1e3a8a] mb-2 tracking-wide uppercase">
-                Location Highlights
+            <div className="mb-12">
+              <h2 className="text-2xl md:text-[32px] font-bold text-[#1e3a8a] mb-6 tracking-wide uppercase">
+                {projectData?.locationHighlightsTitle || 'Location Highlights'}
               </h2>
+              {projectData?.locationHighlightsDescription && (
+                <p className="text-gray-600 mt-4 mb-6 whitespace-pre-wrap">{projectData.locationHighlightsDescription}</p>
+              )}
             </div>
 
             {loading ? (
               <p className="text-gray-500">Loading location highlights...</p>
-            ) : locationData.length === 0 ? (
-              <p className="text-gray-500">No location highlights found.</p>
-            ) : (
+            ) : locationData.length === 0 ? null : (
               <div className="flex flex-col mb-8">
                 {locationData.map((location, index) => (
                   <LocationAccordion 

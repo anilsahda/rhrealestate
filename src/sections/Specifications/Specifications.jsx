@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import SpecItem from './SpecItem'
 import api from '../../services/api'
 
-const Specifications = () => {
+const Specifications = ({ projectData }) => {
   const [openIndex, setOpenIndex] = useState(null)
   const [specificationsData, setSpecificationsData] = useState([])
   const [loading, setLoading] = useState(true)
@@ -64,15 +64,16 @@ const Specifications = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* ── Section Header ── */}
-        <div className="mb-10">
-          <h2 className="text-2xl md:text-[32px] font-bold text-[#1e3a8a] mb-2 tracking-wide uppercase">
-            Specifications
+        <div className="mb-12">
+          <h2 className="text-2xl md:text-[32px] font-bold text-[#1e3a8a] mb-6 tracking-wide uppercase">
+            {projectData?.specificationsTitle || 'Specifications'}
           </h2>
+          {projectData?.specificationsDescription && (
+            <p className="text-gray-600 mt-4 mb-6 whitespace-pre-wrap">{projectData.specificationsDescription}</p>
+          )}
         </div>
 
-        {specificationsData.length === 0 ? (
-          <p className="text-gray-500">No specifications found.</p>
-        ) : (
+        {specificationsData.length === 0 ? null : (
           /* ── 2-Column Accordion Layout ── */
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-8">
             
